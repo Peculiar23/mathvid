@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Lectures</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.3/plyr.css">
+    <style>
+        body {
+            background-image: url('https://i.pinimg.com/564x/c8/c3/0e/c8c30e5a9e8c1c27cc12b1c602b3bee1.jpg');
+            background-size: cover;
+            color: #fff;
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
+
+        .container {
+            padding-top: 50px; /* Instead of margin-top for better spacing */
+        }
+
+        #video-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        video {
+            width: 100%;
+            max-width: 300px;
+            margin: 10px;
+        }
+
+        h1 {
+            margin-bottom: 30px; /* Add some space below the heading */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="text-center">Math Videos</h1>
+    <div id="video-list"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.plyr.io/3.6.3/plyr.js"></script>
+<script>
+    // Sample video data
+    const videos = [
+        { title: 'Group Theory 1', url: 'https://mathematicsdiscord.de/groupTheoryLecture' },
+        { title: 'Group Theory 2', url: 'https://mathematicsdiscord.de/groupTheoryLecture2' },
+        { title: 'Intro to Linear Algebra', url: 'https://mathematicsdiscord.de/introductionLinearAlgebra' },
+        { title: 'Automata Theory', url: 'https://mathematicsdiscord.de/automataTheory' },
+        { title: 'Taylor Polynomial Proof', url: 'https://mathematicsdiscord.de/taylorProof' },
+        // Add more video entries as needed
+    ];
+
+    // Function to render video elements
+    function renderVideos() {
+        const videoList = document.getElementById('video-list');
+        videoList.innerHTML = '';
+
+        videos.forEach(video => {
+            const videoElement = document.createElement('video');
+            videoElement.src = video.url;
+            videoElement.poster = 'video_thumbnail.jpg'; // Replace with your video thumbnail
+            videoElement.controls = true;
+
+            const titleElement = document.createElement('h5');
+            titleElement.textContent = video.title;
+
+            const videoWrapper = document.createElement('div');
+            videoWrapper.appendChild(videoElement);
+            videoWrapper.appendChild(titleElement);
+
+            videoList.appendChild(videoWrapper);
+        });
+
+        // Initialize Plyr for video player functionality
+        const players = Array.from(document.querySelectorAll('video')).map(player => new Plyr(player));
+    }
+
+    // Render videos when the page is loaded
+    window.onload = renderVideos;
+</script>
+
+</body>
+</html>
